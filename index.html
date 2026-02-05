@@ -36,7 +36,7 @@ body {
   font-size:50px;
   z-index:10;
   animation:fadeOut 2s ease forwards;
-  animation-delay:2.5s;
+  animation-delay:3.5s;
   font-family:'Pacifico',cursive;
   padding: 10%;
 }
@@ -185,7 +185,7 @@ body {
 
 <!-- LANDING -->
 <div id="landing">
-  💜 Someone special shared this with you
+  Kuttah's special messages on your special day!
 </div>
 
 <!-- LIGHTS -->
@@ -203,35 +203,36 @@ body {
 <!-- STEP 1 -->
 <div class="card" id="s1">
   <h1 class="happy">🎂 Happiest Birthday <span class="name">Nishuuu</span></h1>
-  <p>Same world. Extra cuteness added today 😌</p>
-  <button class="btn" onclick="go(1,2)">Lets Goooo</button>
+  <p style="font-size: 14px;">Another year older… somehow even cuter 🫣</p>
+  <p style="font-size: 14px;">Today you’re officially allowed to be extra 🎂</p>
+  <button class="btn" onclick="go(1,2)">Lets Goooo for more surprise</button>
 </div>
 
 <!-- STEP 2 -->
 <div class="card hidden" id="s2">
-  <h2>Important Question 🤨</h2>
+  <h2>Before That An Important Question 🤨</h2>
   <p>What do I call you the most?</p>
   <div class="options">
     <div class="option" onclick="wrong()">Nisha</div>
     <div class="option" onclick="wrong()">Angel</div>
-    <div class="option" onclick="right()">Nishuuu</div>
+    <div class="option" onclick="right()">Paiyaah</div>
     <div class="option" onclick="wrong()">Madam Ji</div>
   </div>
 </div>
 
 <!-- STEP 3 -->
 <div class="card hidden" id="s3">
-  <h2>💖 Message for You!</h2>
+  <h2>💖 A long message for you!</h2>
   <p id="typedText"></p>
   <button class="btn" onclick="go(3,4)">One more thing 😏</button>
 </div>
 
 <!-- STEP 4 -->
 <div class="card hidden" id="s4">
-  <h2>🎁 Your Gift</h2>
+  <h2>🎁 Your little gift</h2>
   <p>It’s blurred for a reason 😌</p>
   <img src="gift.jpg" style="width:100%;border-radius:16px;filter:blur(12px)">
-  <p><b>Collect it from me 💜</b></p>
+  <p><b>Nerla vandhu nalaiku vaangiko da paiyaah... 💜</b></p>
   <button class="btn" onclick="startCredits()">Finish 🎬</button>
 </div>
 
@@ -249,7 +250,8 @@ body {
     Starring<br>Nishuuu 💜<br><br>
     Supporting Role<br>Kuttah 😌<br><br>
     Idea<br>Me!<br><br>
-    Created & Developed by<br>Kaviney💜
+    Content & Code Help<br>ChatGPT😜<br><br>
+    Created & Developed by<br>Kaviney
   </div>
 </div>
 
@@ -261,8 +263,8 @@ body {
 <script>
 const naughty=[
   "Ayyo focus pannu...focus pannu 😜",
-  "Wrong daa paiyaah 😏",
-  "Brain vacation la irukka? 🤭"
+  "Wrong daa kuttaaah 😏",
+  "Moolai vacation la irukka? 🤭"
 ];
 
 function go(a,b){
@@ -283,9 +285,15 @@ function right(){
 }
 
 const msg=`Dear Nishuuu💜
-You’re my favourite constant.
-From silly laughs to Stranger Things nights,
-everything feels lighter with you.`;
+Wishing you once again a very happy year ahead 🤍
+
+You’re honestly one of the most mature gitl I’ve ever interacted with and I like that! And ohh your voice is soo awesome
+
+I truly believe we share a special attachment and understanding. I love to continue this cute bond lasts longer and longer 🤞
+
+Just be open, be yourself, and don’t overthink anything when you’re around me. No judgments here — just good vibes. I’m here, always.
+
+And before you get too comfortable… there is something waiting for you on the next page 😌🎁`;
 
 let i=0;
 function typeMessage(){
