@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport"
+  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Happy Birthday Nishuuu 💜</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Pacifico&display=swap" rel="stylesheet">
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  height:100vh;
+  background:
+    linear-gradient(rgba(16,0,43,0.9), rgba(16,0,43,0.95)),
+    url('stranger-things.png') center top / cover no-repeat;
+  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:#fff;
+}
+
+/* ---------------- LANDING ---------------- */
+#landing {
+  position:fixed;
+  inset:0;
+  background:#10002b;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:50px;
+  z-index:10;
+  animation:fadeOut 2s ease forwards;
+  animation-delay:2.5s;
+  font-family:'Pacifico',cursive;
+  padding: 10%;
+}
+
+@keyframes fadeOut {
+  to { opacity:0; visibility:hidden; }
+}
+
+/* ---------------- CHRISTMAS LIGHTS ---------------- */
+.lights {
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  display:flex;
+  justify-content:space-around;
+  z-index:5;
+}
+
+.light {
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  animation:flicker 2s infinite;
+}
+
+.light:nth-child(odd){ background:#ff004f }
+.light:nth-child(even){ background:#c77dff }
+
+@keyframes flicker {
+  0%,100%{opacity:1}
+  50%{opacity:0.3}
+}
+
+/* ---------------- CARDS ---------------- */
+.card {
+  background:rgba(255,255,255,0.14);
+  backdrop-filter:blur(12px);
+  border-radius:20px;
+  padding:26px 22px;
+  width:92%;
+  max-width:380px;
+  text-align:center;
+  box-shadow:0 0 35px rgba(0,0,0,0.6);
+}
+
+.hidden { display:none }
+
+.name {
+  font-family:'Pacifico',cursive;
+  color:#ff7bff;
+  font-size:50px;
+}
+
+.btn {
+  margin-top:22px;
+  padding:16px;
+  border-radius:30px;
+  border:none;
+  background:linear-gradient(135deg,#ff004f,#c77dff);
+  color:#fff;
+  font-size:17px;
+  width:100%;
+  max-width:260px;
+}
+
+.options {
+  display:grid;
+  grid-template-columns:1fr;
+  gap:14px;
+  margin-top:22px;
+}
+
+.option {
+  padding:16px;
+  border-radius:18px;
+  background:rgba(255,255,255,0.28);
+}
+
+/* ---------------- POPUP ---------------- */
+.popup {
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.75);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:20;
+}
+
+.popup-box {
+  background:#fff;
+  color:#333;
+  padding:22px;
+  border-radius:18px;
+  max-width:300px;
+  text-align:center;
+}
+
+/* ---------------- CREDITS ---------------- */
+#credits {
+  position:fixed;
+  inset:0;
+  background:#030303;
+  color:white;
+  display:none;
+  justify-content:center;
+  align-items:flex-end;
+  overflow:hidden;
+  z-index:30;
+}
+
+#creditsText {
+  font-size:16px;
+  line-height:2;
+  text-align:center;
+  animation:scrollCredits 20s linear forwards;
+}
+
+@keyframes scrollCredits {
+  from { transform:translateY(100%) }
+  to { transform:translateY(-120%) }
+}
+
+/* ---------------- FINAL SCREEN ---------------- */
+#final {
+  position:fixed;
+  inset:0;
+  background:#10002b;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  font-family:'Pacifico',cursive;
+  font-size:28px;
+  text-align:center;
+  z-index:40;
+}
+
+.happy{
+  font-size: 25px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- LANDING -->
+<div id="landing">
+  💜 Someone special shared this with you
+</div>
+
+<!-- LIGHTS -->
+<div class="lights">
+  <div class="light"></div><div class="light"></div>
+  <div class="light"></div><div class="light"></div>
+  <div class="light"></div><div class="light"></div>
+</div>
+
+<!-- MUSIC -->
+<audio id="bgMusic" loop>
+  <source src="stranger_theme.mp3" type="audio/mpeg">
+</audio>
+
+<!-- STEP 1 -->
+<div class="card" id="s1">
+  <h1 class="happy">🎂 Happiest Birthday <span class="name">Nishuuu</span></h1>
+  <p>Same world. Extra cuteness added today 😌</p>
+  <button class="btn" onclick="go(1,2)">Lets Goooo</button>
+</div>
+
+<!-- STEP 2 -->
+<div class="card hidden" id="s2">
+  <h2>Important Question 🤨</h2>
+  <p>What do I call you the most?</p>
+  <div class="options">
+    <div class="option" onclick="wrong()">Nisha</div>
+    <div class="option" onclick="wrong()">Angel</div>
+    <div class="option" onclick="right()">Nishuuu</div>
+    <div class="option" onclick="wrong()">Madam Ji</div>
+  </div>
+</div>
+
+<!-- STEP 3 -->
+<div class="card hidden" id="s3">
+  <h2>💖 Message for You!</h2>
+  <p id="typedText"></p>
+  <button class="btn" onclick="go(3,4)">One more thing 😏</button>
+</div>
+
+<!-- STEP 4 -->
+<div class="card hidden" id="s4">
+  <h2>🎁 Your Gift</h2>
+  <p>It’s blurred for a reason 😌</p>
+  <img src="gift.jpg" style="width:100%;border-radius:16px;filter:blur(12px)">
+  <p><b>Collect it from me 💜</b></p>
+  <button class="btn" onclick="startCredits()">Finish 🎬</button>
+</div>
+
+<!-- POPUP -->
+<div class="popup" id="popup">
+  <div class="popup-box">
+    <p id="popupText"></p>
+    <button class="btn" onclick="closePop()">Okay 😌</button>
+  </div>
+</div>
+
+<!-- CREDITS -->
+<div id="credits">
+  <div id="creditsText">
+    Starring<br>Nishuuu 💜<br><br>
+    Supporting Role<br>Kuttah 😌<br><br>
+    Idea<br>Me!<br><br>
+    Created & Developed by<br>Kaviney💜
+  </div>
+</div>
+
+<!-- FINAL -->
+<div id="final">
+  Enjoy rest of the day da Paiyaah! 💜
+</div>
+
+<script>
+const naughty=[
+  "Ayyo focus pannu...focus pannu 😜",
+  "Wrong daa paiyaah 😏",
+  "Brain vacation la irukka? 🤭"
+];
+
+function go(a,b){
+  document.getElementById('s'+a).classList.add('hidden');
+  document.getElementById('s'+b).classList.remove('hidden');
+}
+
+function wrong(){
+  popupText.innerText=naughty[Math.floor(Math.random()*naughty.length)];
+  popup.style.display='flex';
+}
+
+function closePop(){ popup.style.display='none'; }
+
+function right(){
+  go(2,3);
+  typeMessage();
+}
+
+const msg=`Dear Nishuuu💜
+You’re my favourite constant.
+From silly laughs to Stranger Things nights,
+everything feels lighter with you.`;
+
+let i=0;
+function typeMessage(){
+  const el=document.getElementById('typedText');
+  const t=setInterval(()=>{
+    el.innerHTML+=msg.charAt(i);
+    i++;
+    if(i>=msg.length) clearInterval(t);
+  },40);
+}
+
+function startCredits(){
+  document.getElementById('s4').classList.add('hidden');
+  document.getElementById('credits').style.display='flex';
+  setTimeout(()=>{
+    document.getElementById('credits').style.display='none';
+    document.getElementById('final').style.display='flex';
+  },20000);
+}
+
+/* Music auto start after first tap */
+const music=document.getElementById("bgMusic");
+document.body.addEventListener("click",()=>{
+  music.play();
+},{once:true});
+</script>
+
+</body>
+</html>
