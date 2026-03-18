@@ -1,325 +1,709 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport"
-  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<title>Happy Birthday Nishuuu 💜</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Pacifico&display=swap" rel="stylesheet">
-
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<title>Happy Birthday 💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Dancing+Script:wght@700&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
 <style>
-* { box-sizing: border-box; }
+  :root {
+    --rose: #ff6b8a;
+    --blush: #ffb3c6;
+    --gold: #f9c74f;
+    --cream: #fff8f0;
+    --deep: #1a0a0f;
+    --wine: #6b1a2a;
+    --petal: #ffd6e0;
+  }
 
-body {
-  margin:0;
-  font-family:'Poppins',sans-serif;
-  height:100vh;
-  background:
-    linear-gradient(rgba(16,0,43,0.9), rgba(16,0,43,0.95)),
-    url('stranger-things.png') center top / cover no-repeat;
-  overflow:hidden;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  color:#fff;
-}
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ---------------- LANDING ---------------- */
-#landing {
-  position:fixed;
-  inset:0;
-  background:#10002b;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:50px;
-  z-index:10;
-  animation:fadeOut 2s ease forwards;
-  animation-delay:3.5s;
-  font-family:'Pacifico',cursive;
-  padding: 10%;
-}
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--deep);
+    color: var(--cream);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+  }
 
-@keyframes fadeOut {
-  to { opacity:0; visibility:hidden; }
-}
+  /* ---- PETALS ---- */
+  .petals-container {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+  }
 
-/* ---------------- CHRISTMAS LIGHTS ---------------- */
-.lights {
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  display:flex;
-  justify-content:space-around;
-  z-index:5;
-}
+  .petal {
+    position: absolute;
+    top: -30px;
+    font-size: 16px;
+    animation: fall linear infinite;
+    opacity: 0.7;
+  }
 
-.light {
-  width:10px;
-  height:10px;
-  border-radius:50%;
-  animation:flicker 2s infinite;
-}
+  @keyframes fall {
+    0%   { transform: translateY(-30px) rotate(0deg); opacity: 0.8; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+  }
 
-.light:nth-child(odd){ background:#ff004f }
-.light:nth-child(even){ background:#c77dff }
+  /* ---- PAGES ---- */
+  .page {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 28px 24px;
+    z-index: 5;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.9s ease;
+    text-align: center;
+  }
 
-@keyframes flicker {
-  0%,100%{opacity:1}
-  50%{opacity:0.3}
-}
+  .page.active {
+    opacity: 1;
+    pointer-events: all;
+  }
 
-/* ---------------- CARDS ---------------- */
-.card {
-  background:rgba(255,255,255,0.14);
-  backdrop-filter:blur(12px);
-  border-radius:20px;
-  padding:26px 22px;
-  width:92%;
-  max-width:380px;
-  text-align:center;
-  box-shadow:0 0 35px rgba(0,0,0,0.6);
-}
+  /* ---- SPLASH ---- */
+  #splash {
+    background: radial-gradient(ellipse at center, #3d0a18 0%, #1a0a0f 70%);
+  }
 
-.hidden { display:none }
+  #splash .splash-emoji {
+    font-size: 64px;
+    animation: pulse 2s ease-in-out infinite;
+    display: block;
+    margin-bottom: 18px;
+  }
 
-.name {
-  font-family:'Pacifico',cursive;
-  color:#ff7bff;
-  font-size:50px;
-}
+  @keyframes pulse {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.12); }
+  }
 
-.btn {
-  margin-top:22px;
-  padding:16px;
-  border-radius:30px;
-  border:none;
-  background:linear-gradient(135deg,#ff004f,#c77dff);
-  color:#fff;
-  font-size:17px;
-  width:100%;
-  max-width:260px;
-}
+  #splash h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(34px, 9vw, 52px);
+    color: var(--blush);
+    line-height: 1.2;
+    text-shadow: 0 0 40px rgba(255, 107, 138, 0.6);
+    margin-bottom: 12px;
+  }
 
-.options {
-  display:grid;
-  grid-template-columns:1fr;
-  gap:14px;
-  margin-top:22px;
-}
+  #splash p {
+    font-size: 14px;
+    color: rgba(255, 220, 230, 0.6);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 42px;
+  }
 
-.option {
-  padding:16px;
-  border-radius:18px;
-  background:rgba(255,255,255,0.28);
-}
+  /* ---- MESSAGE ---- */
+  #message {
+    background: linear-gradient(160deg, #1f0612 0%, #0d0408 100%);
+    overflow: hidden;
+  }
 
-/* ---------------- POPUP ---------------- */
-.popup {
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.75);
-  display:none;
-  justify-content:center;
-  align-items:center;
-  z-index:20;
-}
+  .message-scroll {
+    width: 100%;
+    max-width: 420px;
+    max-height: 75vh;
+    overflow-y: auto;
+    scrollbar-width: none;
+    padding: 0 4px;
+  }
 
-.popup-box {
-  background:#fff;
-  color:#333;
-  padding:22px;
-  border-radius:18px;
-  max-width:300px;
-  text-align:center;
-}
+  .message-scroll::-webkit-scrollbar { display: none; }
 
-/* ---------------- CREDITS ---------------- */
-#credits {
-  position:fixed;
-  inset:0;
-  background:#030303;
-  color:white;
-  display:none;
-  justify-content:center;
-  align-items:flex-end;
-  overflow:hidden;
-  z-index:30;
-}
+  .msg-label {
+    font-family: 'Dancing Script', cursive;
+    font-size: 22px;
+    color: var(--rose);
+    margin-bottom: 22px;
+    display: block;
+  }
 
-#creditsText {
-  font-size:16px;
-  line-height:2;
-  text-align:center;
-  animation:scrollCredits 20s linear forwards;
-}
+  #typedText {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(15px, 4vw, 18px);
+    line-height: 1.9;
+    color: rgba(255, 240, 245, 0.92);
+    white-space: pre-wrap;
+    text-align: left;
+  }
 
-@keyframes scrollCredits {
-  from { transform:translateY(100%) }
-  to { transform:translateY(-120%) }
-}
+  #typedText strong {
+    color: var(--rose);
+  }
 
-/* ---------------- FINAL SCREEN ---------------- */
-#final {
-  position:fixed;
-  inset:0;
-  background:#10002b;
-  display:none;
-  justify-content:center;
-  align-items:center;
-  font-family:'Pacifico',cursive;
-  font-size:28px;
-  text-align:center;
-  z-index:40;
-}
+  .msg-btn-wrap {
+    margin-top: 28px;
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
 
-.happy{
-  font-size: 25px;
-}
+  /* ---- QUESTION ---- */
+  #question {
+    background: radial-gradient(ellipse at 50% 40%, #2a0818 0%, #0e0308 100%);
+  }
+
+  #question h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(28px, 8vw, 42px);
+    color: var(--blush);
+    margin-bottom: 8px;
+    text-shadow: 0 0 30px rgba(255,107,138,0.5);
+  }
+
+  #question p {
+    font-size: 13px;
+    color: rgba(255,200,215,0.5);
+    margin-bottom: 44px;
+    letter-spacing: 0.08em;
+  }
+
+  .btn-pair {
+    display: flex;
+    flex-direction: row;
+    gap: 18px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 340px;
+    margin: 0 auto;
+  }
+
+  #yesBtn {
+    padding: 16px 42px;
+    border-radius: 50px;
+    border: none;
+    background: linear-gradient(135deg, #ff4d6d, #c9184a);
+    color: white;
+    font-family: 'Dancing Script', cursive;
+    font-size: 26px;
+    cursor: pointer;
+    box-shadow: 0 6px 30px rgba(255, 77, 109, 0.5);
+    transition: all 0.4s ease;
+    position: relative;
+    z-index: 10;
+  }
+
+  #noBtn {
+    padding: 14px 28px;
+    border-radius: 50px;
+    border: 2px solid rgba(255,180,200,0.3);
+    background: rgba(255,255,255,0.05);
+    color: rgba(255,200,215,0.7);
+    font-size: 18px;
+    cursor: pointer;
+    transition: font-size 0.3s ease, padding 0.3s ease;
+    position: relative;
+    z-index: 9;
+  }
+
+  /* ---- FINAL ---- */
+  #final {
+    background: radial-gradient(ellipse at center, #3d0a18 0%, #1a0a0f 80%);
+  }
+
+  #final .final-emoji {
+    font-size: 72px;
+    display: block;
+    animation: heartbeat 1.2s ease-in-out infinite;
+    margin-bottom: 22px;
+  }
+
+  @keyframes heartbeat {
+    0%,100% { transform: scale(1); }
+    14% { transform: scale(1.2); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.15); }
+    56% { transform: scale(1); }
+  }
+
+  #final h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(32px, 9vw, 52px);
+    color: var(--blush);
+    text-shadow: 0 0 40px rgba(255,107,138,0.7);
+    line-height: 1.3;
+    margin-bottom: 16px;
+  }
+
+  #final p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(15px, 4vw, 19px);
+    color: rgba(255,230,240,0.75);
+    max-width: 320px;
+    line-height: 1.7;
+  }
+
+  .firework {
+    position: fixed;
+    pointer-events: none;
+    font-size: 28px;
+    z-index: 2;
+    animation: fireworkAnim 1s ease-out forwards;
+  }
+
+  @keyframes fireworkAnim {
+    0%   { transform: translateY(0) scale(0.5); opacity: 1; }
+    100% { transform: translateY(-120px) scale(1.6); opacity: 0; }
+  }
+
+  /* ---- BUTTON ---- */
+  .btn {
+    padding: 15px 36px;
+    border-radius: 50px;
+    border: none;
+    background: linear-gradient(135deg, #ff4d6d, #c9184a);
+    color: white;
+    font-family: 'Dancing Script', cursive;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 6px 28px rgba(255, 77, 109, 0.45);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    letter-spacing: 0.03em;
+  }
+
+  .btn:active { transform: scale(0.96); }
+
+  /* ---- DIVIDER ---- */
+  .divider {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--rose), transparent);
+    margin: 20px auto;
+  }
+
+  /* ---- GLOW ORBS ---- */
+  .orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(60px);
+    pointer-events: none;
+    z-index: 0;
+    animation: drift 8s ease-in-out infinite alternate;
+  }
+
+  @keyframes drift {
+    from { transform: translate(0,0) scale(1); }
+    to   { transform: translate(20px, -30px) scale(1.1); }
+  }
+
+  .orb1 { width: 220px; height: 220px; background: rgba(255,77,109,0.18); top: -60px; right: -60px; }
+  .orb2 { width: 180px; height: 180px; background: rgba(200,30,74,0.15); bottom: 40px; left: -40px; animation-delay: -4s; }
+
+  /* ---- STARS ---- */
+  .stars {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle ease-in-out infinite;
+  }
+
+  @keyframes twinkle {
+    0%,100% { opacity: 0.2; }
+    50% { opacity: 0.9; }
+  }
+
+  /* ---- CREDITS ---- */
+  #credits {
+    background: #000;
+    overflow: hidden;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0;
+  }
+
+  .credits-scroll-wrap {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    overflow: hidden;
+    position: relative;
+  }
+
+  #creditsRoll {
+    width: 100%;
+    max-width: 380px;
+    padding: 0 28px 0 28px;
+    text-align: center;
+    animation: rollUp 55s linear forwards;
+    will-change: transform;
+  }
+
+  @keyframes rollUp {
+    0%   { transform: translateY(100vh); }
+    100% { transform: translateY(-160%); }
+  }
+
+  .credits-studio {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255,200,215,0.45);
+    margin-bottom: 60px;
+  }
+
+  .credits-title-main {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(36px, 10vw, 56px);
+    color: #fff;
+    text-shadow: 0 0 60px rgba(255,107,138,0.8), 0 0 20px rgba(255,107,138,0.5);
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+
+  .credits-title-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: rgba(255,180,200,0.6);
+    margin-bottom: 80px;
+    letter-spacing: 0.06em;
+  }
+
+  .credits-role {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(255,200,215,0.45);
+    margin-bottom: 8px;
+  }
+
+  .credits-name {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(26px, 7vw, 36px);
+    color: #fff;
+    margin-bottom: 54px;
+  }
+
+  .credits-divider {
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,107,138,0.6), transparent);
+    margin: 0 auto 54px;
+  }
+
+  .credits-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(18px, 5vw, 24px);
+    color: rgba(255, 220, 230, 0.8);
+    line-height: 1.7;
+    margin-bottom: 70px;
+    padding: 0 10px;
+  }
+
+  .credits-final-bday {
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+
+  .credits-final-bday .emoji-big {
+    font-size: 60px;
+    display: block;
+    animation: pulse 2s ease-in-out infinite;
+    margin-bottom: 16px;
+  }
+
+  .credits-final-bday h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(32px, 9vw, 50px);
+    color: #ffb3c6;
+    text-shadow: 0 0 40px rgba(255,107,138,0.9);
+    line-height: 1.3;
+    margin-bottom: 14px;
+  }
+
+  .credits-final-bday p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(15px, 4vw, 18px);
+    color: rgba(255,230,240,0.7);
+    line-height: 1.8;
+    padding: 0 6px;
+    margin-bottom: 60px;
+  }
+
+  .credits-end-note {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: rgba(255,180,200,0.3);
+    text-transform: uppercase;
+    padding-bottom: 40px;
+  }
 </style>
 </head>
-
 <body>
 
-<!-- LANDING -->
-<div id="landing">
-  Kuttah's special messages on your special day!
+<!-- ORBS -->
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<!-- STARS -->
+<div class="stars" id="stars"></div>
+
+<!-- PETALS -->
+<div class="petals-container" id="petals"></div>
+
+<!-- PAGE 1: SPLASH -->
+<div class="page active" id="splash">
+  <span class="splash-emoji">🎂</span>
+  <h1>Today is all about you, Love</h1>
+  <div class="divider"></div>
+  <p>a little something from the heart</p>
+  <button class="btn" onclick="goTo('splash','message')">Open your gift 💌</button>
 </div>
 
-<!-- LIGHTS -->
-<div class="lights">
-  <div class="light"></div><div class="light"></div>
-  <div class="light"></div><div class="light"></div>
-  <div class="light"></div><div class="light"></div>
-</div>
-
-<!-- MUSIC -->
-<audio id="bgMusic" loop>
-  <source src="stranger_theme.mp3" type="audio/mpeg">
-</audio>
-
-<!-- STEP 1 -->
-<div class="card" id="s1">
-  <h1 class="happy">🎂 Happiest Birthday <span class="name">Nishuuu</span></h1>
-  <p style="font-size: 14px;">Another year older… somehow even cuter 🫣</p>
-  <p style="font-size: 14px;">Today you’re officially allowed to be extra 🎂</p>
-  <button class="btn" onclick="go(1,2)">Lets Goooo for more surprise</button>
-</div>
-
-<!-- STEP 2 -->
-<div class="card hidden" id="s2">
-  <h2>Before That An Important Question 🤨</h2>
-  <p>What do I call you the most?</p>
-  <div class="options">
-    <div class="option" onclick="wrong()">Nisha</div>
-    <div class="option" onclick="wrong()">Angel</div>
-    <div class="option" onclick="right()">Paiyaah</div>
-    <div class="option" onclick="wrong()">Madam Ji</div>
+<!-- PAGE 2: MESSAGE -->
+<div class="page" id="message">
+  <div class="message-scroll" id="msgScroll">
+    <span class="msg-label">✦ A letter for you ✦</span>
+    <div id="typedText"></div>
+    <div class="msg-btn-wrap" id="msgBtnWrap">
+      <div class="divider"></div>
+      <button class="btn" onclick="goTo('message','question')" style="margin-top:10px">One more thing... 🥺</button>
+    </div>
   </div>
 </div>
 
-<!-- STEP 3 -->
-<div class="card hidden" id="s3">
-  <h2>💖 A long message for you!</h2>
-  <p id="typedText"></p>
-  <button class="btn" onclick="go(3,4)">One more thing 😏</button>
-</div>
-
-<!-- STEP 4 -->
-<div class="card hidden" id="s4">
-  <h2>🎁 Your little gift</h2>
-  <p>It’s blurred for a reason 😌</p>
-  <img src="gift.jpg" style="width:100%;border-radius:16px;filter:blur(12px)">
-  <p><b>Nerla vandhu nalaiku vaangiko da paiyaah... 💜</b></p>
-  <button class="btn" onclick="startCredits()">Finish 🎬</button>
-</div>
-
-<!-- POPUP -->
-<div class="popup" id="popup">
-  <div class="popup-box">
-    <p id="popupText"></p>
-    <button class="btn" onclick="closePop()">Okay 😌</button>
+<!-- PAGE 3: QUESTION -->
+<div class="page" id="question">
+  <h2>An important question 🥺</h2>
+  <p>think carefully before you answer</p>
+  <div class="btn-pair">
+    <button id="noBtn" onclick="clickNo()">No 🙈</button>
+    <button id="yesBtn" onclick="clickYes()">Yes 💖</button>
   </div>
+  <p id="questionLabel" style="margin-top:48px; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:18px; color:rgba(255,200,220,0.7);">
+    Will you be my girlfriend? 💕
+  </p>
 </div>
 
-<!-- CREDITS -->
-<div id="credits">
-  <div id="creditsText">
-    Starring<br>Nishuuu 💜<br><br>
-    Supporting Role<br>Kuttah 😌<br><br>
-    Idea<br>Me!<br><br>
-    Content & Code Help<br>ChatGPT😜<br><br>
-    Created & Developed by<br>Kaviney
+<!-- PAGE 4: FINAL -->
+<div class="page" id="final">
+  <span class="final-emoji">💖</span>
+  <h2>She said yes! 🥳</h2>
+  <div class="divider"></div>
+  <p>Happy Birthday Mine ❤️<br>Here's to forever with you, one day at a time.</p>
+  <button class="btn" onclick="startCredits()" style="margin-top:32px">Roll Credits 🎬</button>
+</div>
+
+<!-- PAGE 5: CREDITS -->
+<div class="page" id="credits">
+  <div class="credits-scroll-wrap">
+    <div id="creditsRoll">
+      <p class="credits-studio">A production by</p>
+      <h1 class="credits-title-main">Our Story</h1>
+      <p class="credits-title-sub">a film about two people finding each other</p>
+
+      <p class="credits-role">Starring</p>
+      <p class="credits-name">Mine - Nivaa 💖</p>
+
+      <div class="credits-divider"></div>
+
+      <p class="credits-role">Co-starring</p>
+      <p class="credits-name">Her Nivak 😌</p>
+
+      <div class="credits-divider"></div>
+
+      <p class="credits-role">Written & Directed By</p>
+      <p class="credits-name">God 🙏</p>
+
+      <div class="credits-divider"></div>
+
+      <p class="credits-role">Original Idea &amp; Website</p>
+      <p class="credits-name">Kaviney 💻</p>
+
+      <div class="credits-divider"></div>
+
+      <p class="credits-role">Coding Partner</p>
+      <p class="credits-name">Claude & Chatgpt</p>
+
+      <div class="credits-divider"></div>
+
+      <p class="credits-role">Special Thanks</p>
+      <p class="credits-name">That One Day Our Paths Crossed 🌸</p>
+
+      <div class="credits-divider"></div>
+
+      <p class="credits-quote">"From 17% to 100% —<br>you were worth every percent." 💜</p>
+
+      <div class="credits-divider"></div>
+
+      <div class="credits-final-bday">
+        <span class="emoji-big">🎂</span>
+        <h2>Happy Birthday, Mine ❤️</h2>
+        <p>May this year bring you more joy than you can hold,<br>
+        more love than you expect,<br>
+        and always — me, right by your side.<br><br>
+        This is only the beginning of something beautiful.<br>
+        Here's to us. 🥂</p>
+      </div>
+
+      <p class="credits-end-note">made with love · always yours</p>
+    </div>
   </div>
-</div>
-
-<!-- FINAL -->
-<div id="final">
-  Enjoy rest of the day da Paiyaah! 💜
 </div>
 
 <script>
-const naughty=[
-  "Ayyo focus pannu...focus pannu 😜",
-  "Wrong daa kuttaaah 😏",
-  "Moolai vacation la irukka? 🤭"
-];
+  // STARS
+  const starsEl = document.getElementById('stars');
+  for(let i=0; i<60; i++){
+    const s = document.createElement('div');
+    s.className = 'star';
+    const sz = Math.random()*2+1;
+    s.style.cssText = `width:${sz}px;height:${sz}px;top:${Math.random()*100}%;left:${Math.random()*100}%;animation-duration:${2+Math.random()*3}s;animation-delay:${Math.random()*3}s;`;
+    starsEl.appendChild(s);
+  }
 
-function go(a,b){
-  document.getElementById('s'+a).classList.add('hidden');
-  document.getElementById('s'+b).classList.remove('hidden');
+  // PETALS
+  const petalEmojis = ['🌸','🌹','💮','🌷','✿'];
+  const petalsEl = document.getElementById('petals');
+  for(let i=0; i<18; i++){
+    const p = document.createElement('div');
+    p.className = 'petal';
+    p.textContent = petalEmojis[Math.floor(Math.random()*petalEmojis.length)];
+    p.style.cssText = `left:${Math.random()*100}%;animation-duration:${5+Math.random()*6}s;animation-delay:${Math.random()*6}s;font-size:${12+Math.random()*12}px;`;
+    petalsEl.appendChild(p);
+  }
+
+  // PAGE TRANSITION
+  function goTo(from, to){
+    document.getElementById(from).classList.remove('active');
+    document.getElementById(to).classList.add('active');
+    if(to === 'message') startTyping();
+  }
+
+  // TYPEWRITER
+  const msg = `Happy Birthday Mine❤️!
+
+Today feels like a nice opportunity for me to tell you that I'm really happy that our paths crossed.
+
+Every conversation we've had, every small moment we've shared, has made me feel more comfortable and happy.
+
+I truly wish that this year brings you lots of happiness than before and I could be the little part of it!
+
+To be honest, the very first time I saw your photo, I had a small instinct in my mind… maybe around 17% feeling that this girl might end up being my better half. When we spoke for the first time, that feeling quietly grew to around 36%. And as the days went by and we kept talking, that confidence slowly kept increasing. What I liked the most was how calm everything felt — there was no rush, no pressure, and I could just be my 100% self while talking to you.
+
+Then came the day I saw you in person for the first time. At that moment, that little instinct in my mind suddenly jumped to about 77%. And thankfully, God was kind enough that you liked me too.
+
+You know, I've always prayed for a girl who would understand me as I am — someone with whom I could share the same wavelength, similar thoughts, and a comfortable understanding. When we spoke for the first time, I genuinely felt that. It felt like we had a lot of similarities in how we see things, the way we think, and the way we understand life.
+
+I promise you this — I'll laugh with you on the happy days, and I'll hold you close on the heavy ones. I can't promise a perfect me, but I can promise to make you happy every day, honesty even when I am wrong, efforts lasts till my breathe, and that I will choose you every single day.
+
+I love the way you care, the way you laugh, the way you understand me even without words — it's something very rare.
+
+Lets create more memories together, and continue this beautiful journey step by step.
+
+"You're Mine" 💜`;
+
+  let i = 0, typingInterval = null;
+  function startTyping(){
+    const el = document.getElementById('typedText');
+    el.innerHTML = '';
+    i = 0;
+    typingInterval = setInterval(()=>{
+      el.innerHTML += msg.charAt(i);
+      i++;
+      // auto scroll
+      const scroll = document.getElementById('msgScroll');
+      scroll.scrollTop = scroll.scrollHeight;
+      if(i >= msg.length){
+        clearInterval(typingInterval);
+        document.getElementById('msgBtnWrap').style.opacity = '1';
+      }
+    }, 38);
+  }
+
+  // NO BUTTON LOGIC
+  let noSize = 18;
+let noClickCount = 0;
+let yesSize = 26;
+const noBtn = document.getElementById('noBtn');
+const yesBtn = document.getElementById('yesBtn');
+
+function clickNo(){
+  noClickCount++;
+
+  // First click — snapshot position and switch to fixed so it can fly
+  if(noClickCount === 1){
+    const rect = noBtn.getBoundingClientRect();
+    noBtn.style.position = 'fixed';
+    noBtn.style.left = rect.left + 'px';
+    noBtn.style.top = rect.top + 'px';
+    noBtn.style.margin = '0';
+  }
+
+  noSize = Math.max(8, noSize - 3);
+  noBtn.style.fontSize = noSize + 'px';
+  noBtn.style.padding = Math.max(4, 12 - noClickCount) + 'px ' + Math.max(10, 28 - noClickCount*2) + 'px';
+
+  yesSize += 4;
+  yesBtn.style.fontSize = yesSize + 'px';
+  yesBtn.style.padding = (16 + noClickCount*2) + 'px ' + (42 + noClickCount*3) + 'px';
+
+  const margin = 60;
+  const x = margin + Math.random() * (window.innerWidth - margin*2);
+  const y = margin + Math.random() * (window.innerHeight - margin*2);
+  noBtn.style.left = x + 'px';
+  noBtn.style.top = y + 'px';
+
+  if(noClickCount >= 5) noBtn.style.display = 'none';
 }
 
-function wrong(){
-  popupText.innerText=naughty[Math.floor(Math.random()*naughty.length)];
-  popup.style.display='flex';
-}
+  // Initialize no button position
+  window.addEventListener('load', ()=>{
+    noBtn.style.left = '30px';
+    noBtn.style.top = '120px';
+    noBtn.style.transform = 'none';
+  });
 
-function closePop(){ popup.style.display='none'; }
+  function clickYes(){
+    for(let j=0; j<18; j++){
+      setTimeout(()=>{
+        const fw = document.createElement('div');
+        fw.className = 'firework';
+        fw.textContent = ['🎉','💖','✨','🌟','💕','🎊','🌸'][Math.floor(Math.random()*7)];
+        fw.style.left = (10 + Math.random()*80) + 'vw';
+        fw.style.top = (20 + Math.random()*60) + 'vh';
+        document.body.appendChild(fw);
+        setTimeout(()=> fw.remove(), 1000);
+      }, j * 120);
+    }
+    setTimeout(()=> goTo('question','final'), 1200);
+  }
 
-function right(){
-  go(2,3);
-  typeMessage();
-}
-
-const msg=`Dear Nishuuu💜
-Wishing you once again a very happy year ahead 🤍
-
-You’re honestly one of the most mature gitl I’ve ever interacted with and I like that! And ohh your voice is soo awesome
-
-I truly believe we share a special attachment and understanding. I love to continue this cute bond lasts longer and longer 🤞
-
-Just be open, be yourself, and don’t overthink anything when you’re around me. No judgments here — just good vibes. I’m here, always.
-
-And before you get too comfortable… there is something waiting for you on the next page 😌🎁`;
-
-let i=0;
-function typeMessage(){
-  const el=document.getElementById('typedText');
-  const t=setInterval(()=>{
-    el.innerHTML+=msg.charAt(i);
-    i++;
-    if(i>=msg.length) clearInterval(t);
-  },40);
-}
-
-function startCredits(){
-  document.getElementById('s4').classList.add('hidden');
-  document.getElementById('credits').style.display='flex';
-  setTimeout(()=>{
-    document.getElementById('credits').style.display='none';
-    document.getElementById('final').style.display='flex';
-  },20000);
-}
-
-/* Music auto start after first tap */
-const music=document.getElementById("bgMusic");
-document.body.addEventListener("click",()=>{
-  music.play();
-},{once:true});
+  function startCredits(){
+    document.getElementById('final').classList.remove('active');
+    const creditsPage = document.getElementById('credits');
+    creditsPage.classList.add('active');
+    // reset animation by cloning
+    const roll = document.getElementById('creditsRoll');
+    const clone = roll.cloneNode(true);
+    roll.parentNode.replaceChild(clone, roll);
+  }
 </script>
-
 </body>
 </html>
