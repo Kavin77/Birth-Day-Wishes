@@ -27,7 +27,6 @@
     width: 100vw;
   }
 
-  /* ---- PETALS ---- */
   .petals-container {
     position: fixed;
     inset: 0;
@@ -49,7 +48,6 @@
     100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
   }
 
-  /* ---- PAGES ---- */
   .page {
     position: fixed;
     inset: 0;
@@ -70,7 +68,6 @@
     pointer-events: all;
   }
 
-  /* ---- SPLASH ---- */
   #splash {
     background: radial-gradient(ellipse at center, #3d0a18 0%, #1a0a0f 70%);
   }
@@ -104,7 +101,6 @@
     margin-bottom: 42px;
   }
 
-  /* ---- MESSAGE ---- */
   #message {
     background: linear-gradient(160deg, #1f0612 0%, #0d0408 100%);
     overflow: hidden;
@@ -138,17 +134,10 @@
     text-align: left;
   }
 
-  #typedText strong {
-    color: var(--rose);
-  }
-
   .msg-btn-wrap {
     margin-top: 28px;
-    opacity: 0;
-    transition: opacity 1s ease;
   }
 
-  /* ---- QUESTION ---- */
   #question {
     background: radial-gradient(ellipse at 50% 40%, #2a0818 0%, #0e0308 100%);
   }
@@ -207,7 +196,6 @@
     z-index: 9;
   }
 
-  /* ---- FINAL ---- */
   #final {
     background: radial-gradient(ellipse at center, #3d0a18 0%, #1a0a0f 80%);
   }
@@ -258,7 +246,6 @@
     100% { transform: translateY(-120px) scale(1.6); opacity: 0; }
   }
 
-  /* ---- BUTTON ---- */
   .btn {
     padding: 15px 36px;
     border-radius: 50px;
@@ -275,7 +262,6 @@
 
   .btn:active { transform: scale(0.96); }
 
-  /* ---- DIVIDER ---- */
   .divider {
     width: 60px;
     height: 1px;
@@ -283,7 +269,6 @@
     margin: 20px auto;
   }
 
-  /* ---- GLOW ORBS ---- */
   .orb {
     position: fixed;
     border-radius: 50%;
@@ -301,7 +286,6 @@
   .orb1 { width: 220px; height: 220px; background: rgba(255,77,109,0.18); top: -60px; right: -60px; }
   .orb2 { width: 180px; height: 180px; background: rgba(200,30,74,0.15); bottom: 40px; left: -40px; animation-delay: -4s; }
 
-  /* ---- STARS ---- */
   .stars {
     position: fixed;
     inset: 0;
@@ -325,33 +309,38 @@
   #credits {
     background: #000;
     overflow: hidden;
-    justify-content: flex-end;
-    align-items: center;
     padding: 0;
+    /* override .page flex centering so content isn't forced to center */
+    justify-content: flex-start;
+    align-items: flex-start;
   }
 
   .credits-scroll-wrap {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
+    position: absolute;
+    inset: 0;
     overflow: hidden;
-    position: relative;
   }
 
+  /* The roll div is placed with its TOP at 100vh so it starts fully off-screen below */
   #creditsRoll {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 100vh;          /* starts just below the bottom edge */
     width: 100%;
     max-width: 380px;
-    padding: 0 28px 0 28px;
+    padding: 0 28px 80px 28px;
     text-align: center;
-    animation: rollUp 55s linear forwards;
-    will-change: transform;
+    /* JS sets animation after clone so we don't declare it here */
+  }
+
+  #creditsRoll.rolling {
+    animation: rollUp 90s linear forwards;
   }
 
   @keyframes rollUp {
-    0%   { transform: translateY(100vh); }
-    100% { transform: translateY(-160%); }
+    from { top: 100vh; }
+    to   { top: -9000px; }
   }
 
   .credits-studio {
@@ -383,7 +372,7 @@
 
   .credits-role {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 11px;
+    font-size: 15px;
     letter-spacing: 0.28em;
     text-transform: uppercase;
     color: rgba(255,200,215,0.45);
@@ -435,16 +424,6 @@
     margin-bottom: 14px;
   }
 
-  .credits-final-bday p {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: clamp(15px, 4vw, 18px);
-    color: rgba(255,230,240,0.7);
-    line-height: 1.8;
-    padding: 0 6px;
-    margin-bottom: 60px;
-  }
-
   .credits-end-note {
     font-family: 'Cormorant Garamond', serif;
     font-size: 12px;
@@ -457,23 +436,18 @@
 </head>
 <body>
 
-<!-- ORBS -->
 <div class="orb orb1"></div>
 <div class="orb orb2"></div>
-
-<!-- STARS -->
 <div class="stars" id="stars"></div>
-
-<!-- PETALS -->
 <div class="petals-container" id="petals"></div>
 
 <!-- PAGE 1: SPLASH -->
 <div class="page active" id="splash">
   <span class="splash-emoji">🎂</span>
-  <h1>Today is all about you, Love</h1>
+  <h1>Today is all about you, <br/>My Dear Nivaa💜!</h1>
   <div class="divider"></div>
   <p>a little something from the heart</p>
-  <button class="btn" onclick="goTo('splash','message')">Open your gift 💌</button>
+  <button class="btn" onclick="goTo('splash','message')">Open your small surprise 💌</button>
 </div>
 
 <!-- PAGE 2: MESSAGE -->
@@ -492,32 +466,28 @@
 <div class="page" id="question">
   <h2>An important question 🥺</h2>
   <p>think carefully before you answer</p>
+  <p id="questionLabel" style="margin-top:0px; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:24px; color:rgb(106 93 255 / 70%);font-weight: bold;">
+    Will you be my Vuutukaari?😉 💕
+  </p>
   <div class="btn-pair">
     <button id="noBtn" onclick="clickNo()">No 🙈</button>
     <button id="yesBtn" onclick="clickYes()">Yes 💖</button>
   </div>
-  <p id="questionLabel" style="margin-top:48px; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:18px; color:rgba(255,200,220,0.7);">
-    Will you be my girlfriend? 💕
-  </p>
 </div>
 
 <!-- PAGE 4: FINAL -->
 <div class="page" id="final">
   <span class="final-emoji">💖</span>
-  <h2>She said yes! 🥳</h2>
+  <h2>She said yes!😂🕺🕺</h2>
   <div class="divider"></div>
-  <p>Happy Birthday Mine ❤️<br>Here's to forever with you, one day at a time.</p>
-  <button class="btn" onclick="startCredits()" style="margin-top:32px">Roll Credits 🎬</button>
+  <p>Once Again a Very Happy Birthday Mine ❤️</p>
+  <button class="btn" onclick="startCredits()" style="margin-top:32px">Roll the Credits 🎬</button>
 </div>
 
 <!-- PAGE 5: CREDITS -->
 <div class="page" id="credits">
   <div class="credits-scroll-wrap">
     <div id="creditsRoll">
-      <p class="credits-studio">A production by</p>
-      <h1 class="credits-title-main">Our Story</h1>
-      <p class="credits-title-sub">a film about two people finding each other</p>
-
       <p class="credits-role">Starring</p>
       <p class="credits-name">Mine - Nivaa 💖</p>
 
@@ -534,7 +504,7 @@
       <div class="credits-divider"></div>
 
       <p class="credits-role">Original Idea &amp; Website</p>
-      <p class="credits-name">Kaviney 💻</p>
+      <p class="credits-name">Nivak 💻</p>
 
       <div class="credits-divider"></div>
 
@@ -548,18 +518,13 @@
 
       <div class="credits-divider"></div>
 
-      <p class="credits-quote">"From 17% to 100% —<br>you were worth every percent." 💜</p>
+      <p class="credits-quote">"From 17% to ♾️% —<br>you were worth every percent." 💜</p>
 
       <div class="credits-divider"></div>
 
       <div class="credits-final-bday">
         <span class="emoji-big">🎂</span>
         <h2>Happy Birthday, Mine ❤️</h2>
-        <p>May this year bring you more joy than you can hold,<br>
-        more love than you expect,<br>
-        and always — me, right by your side.<br><br>
-        This is only the beginning of something beautiful.<br>
-        Here's to us. 🥂</p>
       </div>
 
       <p class="credits-end-note">made with love · always yours</p>
@@ -593,87 +558,64 @@
   function goTo(from, to){
     document.getElementById(from).classList.remove('active');
     document.getElementById(to).classList.add('active');
-    if(to === 'message') startTyping();
+    if(to === 'message') showMessage();
   }
 
-  // TYPEWRITER
+  // INSTANT MESSAGE DISPLAY
   const msg = `Happy Birthday Mine❤️!
 
-Today feels like a nice opportunity for me to tell you that I'm really happy that our paths crossed.
+Today feels like a nice opportunity for me to tell you that I'm really happy that our paths crossed. I truly wish that this year brings you lots of happiness than before and I could be the little part of it!
 
-Every conversation we've had, every small moment we've shared, has made me feel more comfortable and happy.
 
-I truly wish that this year brings you lots of happiness than before and I could be the little part of it!
+To be honest, the very first time I saw your photo, I had a small instinct in my mind… maybe around 17% feeling that this girl might end up being my better half. When we spoke for the first time, that feeling quietly grew to around 36%. And as the days went by and we kept talking, that confidence slowly kept increasing. What I liked the most was how calm everything felt — there was no rush, no pressure, and I could just be my 100% self while talking to you. Every conversation we've had, every small moment we've shared in person, has made me feel more comfortable and happy.
 
-To be honest, the very first time I saw your photo, I had a small instinct in my mind… maybe around 17% feeling that this girl might end up being my better half. When we spoke for the first time, that feeling quietly grew to around 36%. And as the days went by and we kept talking, that confidence slowly kept increasing. What I liked the most was how calm everything felt — there was no rush, no pressure, and I could just be my 100% self while talking to you.
-
-Then came the day I saw you in person for the first time. At that moment, that little instinct in my mind suddenly jumped to about 77%. And thankfully, God was kind enough that you liked me too.
 
 You know, I've always prayed for a girl who would understand me as I am — someone with whom I could share the same wavelength, similar thoughts, and a comfortable understanding. When we spoke for the first time, I genuinely felt that. It felt like we had a lot of similarities in how we see things, the way we think, and the way we understand life.
 
-I promise you this — I'll laugh with you on the happy days, and I'll hold you close on the heavy ones. I can't promise a perfect me, but I can promise to make you happy every day, honesty even when I am wrong, efforts lasts till my breathe, and that I will choose you every single day.
+"When the one you prayed for becomes the one🥰...You're the one and you'll be the only one💞"
 
-I love the way you care, the way you laugh, the way you understand me even without words — it's something very rare.
+I promise you this — I'll laugh with you on the happy days and hold you close on the heavy ones. I may not be perfect, but I'll always be honest, even when I'm wrong. I'll keep putting in the effort, every single day, for as long as I breathe — and I'll choose you, always.
 
-Lets create more memories together, and continue this beautiful journey step by step.
 
-"You're Mine" 💜`;
+I love the way you care, the way you laugh, the way you understand me — it's something very rare. Lets create more memories together, and continue this beautiful journey step by step.
 
-  let i = 0, typingInterval = null;
-  function startTyping(){
+                                                          -Yours Nivak💜`;
+
+  function showMessage(){
     const el = document.getElementById('typedText');
-    el.innerHTML = '';
-    i = 0;
-    typingInterval = setInterval(()=>{
-      el.innerHTML += msg.charAt(i);
-      i++;
-      // auto scroll
-      const scroll = document.getElementById('msgScroll');
-      scroll.scrollTop = scroll.scrollHeight;
-      if(i >= msg.length){
-        clearInterval(typingInterval);
-        document.getElementById('msgBtnWrap').style.opacity = '1';
-      }
-    }, 38);
+    el.textContent = msg;
   }
 
   // NO BUTTON LOGIC
   let noSize = 18;
-let noClickCount = 0;
-let yesSize = 26;
-const noBtn = document.getElementById('noBtn');
-const yesBtn = document.getElementById('yesBtn');
+  let noClickCount = 0;
+  let yesSize = 26;
+  const noBtn = document.getElementById('noBtn');
+  const yesBtn = document.getElementById('yesBtn');
 
-function clickNo(){
-  noClickCount++;
-
-  // First click — snapshot position and switch to fixed so it can fly
-  if(noClickCount === 1){
-    const rect = noBtn.getBoundingClientRect();
-    noBtn.style.position = 'fixed';
-    noBtn.style.left = rect.left + 'px';
-    noBtn.style.top = rect.top + 'px';
-    noBtn.style.margin = '0';
+  function clickNo(){
+    noClickCount++;
+    if(noClickCount === 1){
+      const rect = noBtn.getBoundingClientRect();
+      noBtn.style.position = 'fixed';
+      noBtn.style.left = rect.left + 'px';
+      noBtn.style.top = rect.top + 'px';
+      noBtn.style.margin = '0';
+    }
+    noSize = Math.max(8, noSize - 3);
+    noBtn.style.fontSize = noSize + 'px';
+    noBtn.style.padding = Math.max(4, 12 - noClickCount) + 'px ' + Math.max(10, 28 - noClickCount*2) + 'px';
+    yesSize += 4;
+    yesBtn.style.fontSize = yesSize + 'px';
+    yesBtn.style.padding = (16 + noClickCount*2) + 'px ' + (42 + noClickCount*3) + 'px';
+    const margin = 60;
+    const x = margin + Math.random() * (window.innerWidth - margin*2);
+    const y = margin + Math.random() * (window.innerHeight - margin*2);
+    noBtn.style.left = x + 'px';
+    noBtn.style.top = y + 'px';
+    if(noClickCount >= 5) noBtn.style.display = 'none';
   }
 
-  noSize = Math.max(8, noSize - 3);
-  noBtn.style.fontSize = noSize + 'px';
-  noBtn.style.padding = Math.max(4, 12 - noClickCount) + 'px ' + Math.max(10, 28 - noClickCount*2) + 'px';
-
-  yesSize += 4;
-  yesBtn.style.fontSize = yesSize + 'px';
-  yesBtn.style.padding = (16 + noClickCount*2) + 'px ' + (42 + noClickCount*3) + 'px';
-
-  const margin = 60;
-  const x = margin + Math.random() * (window.innerWidth - margin*2);
-  const y = margin + Math.random() * (window.innerHeight - margin*2);
-  noBtn.style.left = x + 'px';
-  noBtn.style.top = y + 'px';
-
-  if(noClickCount >= 5) noBtn.style.display = 'none';
-}
-
-  // Initialize no button position
   window.addEventListener('load', ()=>{
     noBtn.style.left = '30px';
     noBtn.style.top = '120px';
@@ -699,10 +641,23 @@ function clickNo(){
     document.getElementById('final').classList.remove('active');
     const creditsPage = document.getElementById('credits');
     creditsPage.classList.add('active');
-    // reset animation by cloning
-    const roll = document.getElementById('creditsRoll');
-    const clone = roll.cloneNode(true);
-    roll.parentNode.replaceChild(clone, roll);
+
+    // Remove old roll, create a fresh one so animation restarts cleanly
+    const wrap = creditsPage.querySelector('.credits-scroll-wrap');
+    const oldRoll = document.getElementById('creditsRoll');
+    const clone = oldRoll.cloneNode(true);
+
+    // Ensure it starts at top:100vh (fully below screen), no animation class yet
+    clone.style.top = '100vh';
+    clone.classList.remove('rolling');
+    wrap.replaceChild(clone, oldRoll);
+
+    // Add the animation class on next frame so the browser registers the start position
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        clone.classList.add('rolling');
+      });
+    });
   }
 </script>
 </body>
